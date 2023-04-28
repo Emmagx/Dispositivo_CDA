@@ -2,12 +2,19 @@
 #include <WiFi.h>
 #include <ThingSpeak.h>
 #include <MQUnifiedsensor.h>
-#include <WiFiManager.h>
+//#include <WiFiManager.h>
 #include "DHT.h"
+#include "WiFi.h"
+
+#include "arduino_secrets.h"
+
+const char* ssid = SECRET_SSID;
+
+const char* password = SECRET_PSW;
 
 //Declaramos las credenciales wifi por Defecto
-const char* ssid="BITMEC_PRODUCCION";
-const char* password="Produccion22*";
+//const char* ssid="BITMEC_PRODUCCION";
+//const char* password="Produccion22*";
 
 //Definimos los Pin y e tipo de sensor DHT: DHT11 o DHT22
 #define DHTPIN 14
@@ -53,18 +60,27 @@ const unsigned long interval = 5000; // intervalo de tiempo entre lecturas (en m
 WiFiClient cliente;
 //Codigo que se almacenara lo que se hara en la inicializacion de la tarjeta.
 void setup() {
-  WiFi.mode(WIFI_STA);  //Colocamos el modo Wifi a modo estacion
+   Serial.begin(115200);
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+
+    delay(500);
+
+    Serial.println("Connecting to WiFi..");}
+  //WiFi.mode(WIFI_STA);  //Colocamos el modo Wifi a modo estacion
   Serial.begin(115200); //Colocamos en que frecuencia se va a leer el monitor serial
 
-  WiFiManager wiFiManager; //Revisa las credenciales de WIFI, 
+  //WiFiManager wiFiManager; //Revisa las credenciales de WIFI, 
   //wiFiManager.resetSettings(); //resetea los datos de las redes wifi antes conocidas
-  bool res = wiFiManager.autoConnect("Dispositivo", "12345678"); //inicia un servidor web para poder conectarnos a la placa y asi manejar las credenciales de WiFi
+  //bool res = wiFiManager.autoConnect("Dispositivo", "12345678"); //inicia un servidor web para poder conectarnos a la placa y asi manejar las credenciales de WiFi
   //prueba la conexion a internet
-  if (!res) {
-    Serial.println("Failed to connect!");// sino se pudo conectar
-  } else {
-    Serial.println("Connected :)");     //Si se encuentra conectado
-  }
+  //if (!res) {
+    //Serial.println("Failed to connect!");// sino se pudo conectar
+  //} else {
+    //Serial.println("Connected :)");     //Si se encuentra conectado
+  //}
 //Conectamos a thinkspeak
   ThingSpeak.begin(cliente);
   delay(5000); //Esperamos 5 segundos para darle tiempo para conectarse
@@ -109,7 +125,7 @@ void setup() {
   CO     | 491204 | -5.826
   Alcohol| 97124  | -4.918
   */
-  MQ4.setA(3811.9); MQ4.setB(-3.113); //// A Y B depende del gas a Leer.
+  MQ4.setA(1012.7); MQ4.setB(-2.786); //// A Y B depende del gas a Leer.
   MQ4.setR0(1.7213886976);
   // Con el Metodo de Regresion 1:
   //*********Esta es la formula que utiliza la libreria para dar los datos: PPM =  a*ratio^b *****************
