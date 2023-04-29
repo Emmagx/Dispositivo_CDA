@@ -10,7 +10,7 @@ void loop (){
   float sensorValue;
   for (int x =0; x<100; x++)
   {
-    sensorValue = sensorValue + analogRead(32);
+    sensorValue = sensorValue + analogRead(25);
   }
   sensorValue = sensorValue /100;
 
