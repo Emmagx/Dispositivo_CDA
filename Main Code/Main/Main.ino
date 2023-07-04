@@ -138,19 +138,19 @@ void setup() {
 //Funcion que lee el sensor DHT
 void leerSensorDHT() {
   //Leemos cada 5s el sensor DHT sin interrumpir la lectura de los demas sensores
-  unsigned long currentTime = millis(); //Iguala los tiempos
-  if (currentTime - lastTime >= interval) { //Entra en un bucle si el ultimo tiempo y el ultimo tiempo registrado siguen siendo mayores al intervalo
-    lastTime = currentTime;
-    humedad = dht.readHumidity(); //Lee el sensor DHT y le da su valor a la variable humedad
-    temperatura = dht.readTemperature(); //lee el sensor DHT y le da su valor a la variable temperatura.
+  //unsigned long currentTime = millis(); //Iguala los tiempos
+  //if (currentTime - lastTime >= interval) { //Entra en un bucle si el ultimo tiempo y el ultimo tiempo registrado siguen siendo mayores al intervalo
+    //lastTime = currentTime;
+    //humedad = dht.readHumidity(); //Lee el sensor DHT y le da su valor a la variable humedad
+    //temperatura = dht.readTemperature(); //lee el sensor DHT y le da su valor a la variable temperatura.
     /*Imprimimos los datos en el monitor Serial*/
-    Serial.print("temperatura: "); 
-    Serial.print(temperatura);
-    Serial.println(" °C");
-    Serial.print("Humedad: ");
-    Serial.print(humedad);
-    Serial.print("%");
-  }
+    //Serial.print("temperatura: "); 
+    //Serial.print(temperatura);
+    //Serial.println(" °C");
+    //Serial.print("Humedad: ");
+    //Serial.print(humedad);
+    //Serial.print("%");
+  //}
 }
 
 //Funcion que lee el sensor MQ7
@@ -168,9 +168,9 @@ void leerSensorMQ5() {
   MQ5.update(); //Llamamos la funcion update
   propano = MQ5.readSensor(); //le damos el valor que leímos a la variable propano
   //Imprimimos los valores en el monitor Serial
-  Serial.print("GAS: ");
-  Serial.println(propano, 10);
-  delay(1000);//damos un segundo de delay para la siguiente medición
+  //Serial.print("GAS: ");
+  //Serial.println(propano, 10);
+  //delay(1000);//damos un segundo de delay para la siguiente medición
 }
 
 //Funcion que lee el sensor MQ5
@@ -178,9 +178,9 @@ void leerSensorMQ4() {
   MQ4.update(); //Llamamos la funcion update
   metano = MQ4.readSensor(); //le damos el valor que leímos a la variable metano
   //Imprimimos los valores en el monitor Serial
-  Serial.print("LDP: ");
-  Serial.println(metano,20); 
-  delay(1000);//damos un segundo de delay para la siguiente medición
+  //Serial.print("LDP: ");
+  //Serial.println(metano,20); 
+  //delay(1000);//damos un segundo de delay para la siguiente medición
 }
 //Función que envia los datos a la NUBE
 void enviarDatosThingSpeak() {
