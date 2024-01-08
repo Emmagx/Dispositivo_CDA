@@ -26,5 +26,3 @@ contact:
 #Brayan Emanuel Garcia
 GitHub: Emmagx
 Mail: emmagx.dev@gmail.com
-#Alexander Us
-Mail: usa06565@gmail.com
